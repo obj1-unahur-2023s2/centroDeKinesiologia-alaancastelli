@@ -1,0 +1,46 @@
+import aparatos.*
+import pacientes.*
+
+
+describe "test parte 1 "{
+	
+	const  leonardo = new Paciente(edad = 40, nivelDeDolor = 10, nivelDeFortalezaMuscular = 20)
+	const  milena = new Paciente(edad = 3, nivelDeDolor = 30, nivelDeFortalezaMuscular = 50)
+	
+	
+	test "Leonardo puede usar los tres aparatos creados" {
+		
+		leonardo.agregarAparatosARutina(new Magneto())
+		leonardo.agregarAparatosARutina(new Bicicleta())
+		leonardo.agregarAparatosARutina(new Minitramp())
+		
+		assert.that(leonardo.puedeHacerRutina())
+
+	}
+	test " Milena puede usar sólo el magneto"{
+		milena.agregarAparatosARutina(new Magneto())
+		
+		assert.that(milena.puedeHacerRutina())
+		
+	}
+	test "Después de usar el magneto una vez, el nivel de dolor de Milena baja a 27"{
+		milena.usarAparato(new Magneto())
+		
+		assert.equals(milena.nivelDeDolor(), 27)
+	}
+	test "Después de usar la bicicleta una vez, el nivel de dolor de Leonardo baja a 6, y la fortaleza sube a 23"{
+		
+		leonardo.usarAparato(new Bicicleta())
+		
+		assert.equals(23,leonardo.nivelDeFortalezaMuscular())
+		assert.equals(6,leonardo.nivelDeDolor()) 
+		
+	}
+	test "Después de usar el minitramp una vez, la fortaleza de Leonardo sube a 24."{
+		
+		leonardo.usarAparato(new Minitramp())
+		
+		assert.equals(24,leonardo.nivelDeFortalezaMuscular())
+		
+	}
+}
